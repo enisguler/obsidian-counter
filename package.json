@@ -1,0 +1,20 @@
+{
+  "name": "interactive-day-counters",
+  "version": "1.4.7",
+  "description": "Simple goal counters for Obsidian.",
+  "main": "main.js",
+  "scripts": {
+    "build": "tsc --noEmit --skipLibCheck && node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs"
+  },
+  "author": "teorikup",
+  "license": "0BSD",
+  "dependencies": {
+    "obsidian": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.9",
+    "typescript": "^5.9.2"
+  }
+}

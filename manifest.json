@@ -1,0 +1,10 @@
+{
+  "id": "interactive-day-counters",
+  "name": "Counter",
+  "version": "1.4.7",
+  "minAppVersion": "1.5.0",
+  "description": "Adds simple goal counters that you can click and style from settings.",
+  "author": "teorikup",
+  "authorUrl": "https://x.com/teorikup",
+  "isDesktopOnly": false
+}
