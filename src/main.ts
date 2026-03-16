@@ -31,7 +31,6 @@ interface InteractiveDayCounterSettings {
 
 const DAY_TOKEN_REGEX = /<day-(\d+)\/(\d+)>/g;
 const DAY_TOKEN_PLAIN_REGEX = /<day-(\d+)\/(\d+)>/;
-const CUSTOM_STYLE_ID = "interactive-day-counter-custom-style";
 const DEFAULT_SETTINGS: InteractiveDayCounterSettings = {
 	borderRadius: 8,
 	borderWidth: 1,
@@ -40,53 +39,6 @@ const DEFAULT_SETTINGS: InteractiveDayCounterSettings = {
 	backgroundColor: "var(--background-primary)",
 	counterSize: 100,
 };
-const SETTINGS_TAB_CSS = `.interactive-day-counter-settings {
-	padding-bottom: 2rem;
-}
-
-.interactive-day-counter-settings__hero {
-	margin-bottom: 1rem;
-	padding: 1rem 1rem 0.9rem;
-	border-radius: 18px;
-	border: 1px solid var(--background-modifier-border);
-	background: var(--background-secondary);
-	box-shadow: none;
-}
-
-.interactive-day-counter-settings__hero h2 {
-	margin: 0 0 0.35rem;
-}
-
-.interactive-day-counter-settings__hero p {
-	margin: 0;
-	color: var(--text-muted);
-	max-width: 60ch;
-}
-
-.interactive-day-counter-settings__preview {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.8rem;
-	margin-top: 1rem;
-}
-
-.interactive-day-counter-settings__token {
-	margin-top: 0.85rem;
-	font-family: var(--font-monospace);
-	font-size: 0.9em;
-	color: var(--text-muted);
-}
-
-.interactive-day-counter-settings .setting-item {
-	border-radius: 14px;
-	padding: 0.9rem 1rem;
-	border: 1px solid var(--background-modifier-border);
-	background: color-mix(in srgb, var(--background-secondary) 74%, transparent);
-}
-
-.interactive-day-counter-settings .setting-item + .setting-item {
-	margin-top: 0.7rem;
-}`;
 const HEX_COLOR_REGEX = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
 const BORDER_COLOR_PICKER_FALLBACK = "#cbd5e1";
 const BACKGROUND_COLOR_PICKER_FALLBACK = "#ffffff";
@@ -334,155 +286,6 @@ function migrateLegacySettings(rawSettings: {
 	};
 }
 
-function buildCounterCss(settings: InteractiveDayCounterSettings): string {
-	const backgroundColor =
-		settings.backgroundMode === "solid"
-			? settings.backgroundColor
-			: "transparent";
-
-	return `:root {
-	--interactive-day-counter-border-color: ${settings.borderColor};
-	--interactive-day-counter-border-radius: ${settings.borderRadius}px;
-	--interactive-day-counter-border-width: ${settings.borderWidth}px;
-	--interactive-day-counter-background-color: ${backgroundColor};
-	--interactive-day-counter-size: ${settings.counterSize}%;
-	--interactive-day-counter-focus-ring-color: var(--interactive-accent);
-	--interactive-day-counter-shadow-color: var(--background-modifier-border-hover);
-}
-
-.interactive-day-counter {
-	display: inline-flex;
-	align-items: stretch;
-	width: fit-content;
-	margin-inline: 0.4rem 0.08rem;
-	position: relative;
-	border-radius: var(--interactive-day-counter-border-radius);
-	color: var(--text-normal);
-	font-size: var(--interactive-day-counter-size);
-	line-height: 1;
-	vertical-align: middle;
-	box-shadow: 0 1px 0 var(--interactive-day-counter-shadow-color);
-	isolation: isolate;
-}
-
-.markdown-source-view.mod-cm6 .interactive-day-counter {
-	top: 0.04em;
-}
-
-.interactive-day-counter::after {
-	content: "";
-	position: absolute;
-	inset: 1px;
-	z-index: 3;
-	pointer-events: none;
-	border-radius: inherit;
-	outline: 0 solid transparent;
-	transition: outline-color 120ms ease, outline-width 120ms ease;
-}
-
-.interactive-day-counter:focus-within::after {
-	outline: 2px solid var(--interactive-day-counter-focus-ring-color);
-}
-
-.interactive-day-counter__value,
-.interactive-day-counter__value-input {
-	margin: 0;
-	padding: 0;
-	border: var(--interactive-day-counter-border-width) solid var(--interactive-day-counter-border-color);
-	color: currentColor;
-	font: inherit;
-	box-shadow: none !important;
-	appearance: none;
-	-webkit-appearance: none;
-}
-.interactive-day-counter__value:disabled {
-	opacity: 1;
-	cursor: default;
-}
-
-.interactive-day-counter__numbers {
-	display: inline-grid;
-	grid-auto-flow: column;
-	align-items: center;
-	justify-content: center;
-	column-gap: 0.08em;
-	min-width: 4.1em;
-	padding: 0.28em 0.48em;
-	background: var(--interactive-day-counter-background-color) !important;
-	background-color: var(--interactive-day-counter-background-color) !important;
-	color: currentColor;
-	font-variant-numeric: tabular-nums;
-	font-feature-settings: "tnum";
-	font-size: 1em;
-	font-weight: 600;
-	line-height: 1;
-	border: var(--interactive-day-counter-border-width) solid var(--interactive-day-counter-border-color);
-	border-radius: var(--interactive-day-counter-border-radius);
-	position: relative;
-	z-index: 1;
-}
-
-.interactive-day-counter__separator {
-	opacity: 0.58;
-	user-select: none;
-	min-width: 0.42em;
-	text-align: center;
-}
-
-.interactive-day-counter__value {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	cursor: text;
-	text-decoration: none;
-	background: transparent !important;
-	background-color: transparent !important;
-	border: 0;
-	line-height: 1;
-	text-align: center;
-}
-
-.interactive-day-counter__value:hover:not(:disabled) {
-	text-decoration: none;
-}
-
-.interactive-day-counter__value-slot {
-	display: inline-flex;
-	align-items: center;
-	min-width: 1.7em;
-	justify-content: center;
-	background: transparent !important;
-	background-color: transparent !important;
-}
-
-.interactive-day-counter__value-input {
-	width: 1.8em;
-	min-width: 1.8em;
-	border: 0;
-	border-radius: 0;
-	background: transparent !important;
-	background-color: transparent !important;
-	color: currentColor;
-	font: inherit;
-	font-variant-numeric: tabular-nums;
-	font-feature-settings: "tnum";
-	font-size: 1em;
-	font-weight: 600;
-	text-align: center;
-	line-height: 1;
-	appearance: textfield;
-	-webkit-appearance: textfield;
-	-moz-appearance: textfield;
-	outline: none;
-}
-
-.interactive-day-counter__value-input::-webkit-outer-spin-button,
-.interactive-day-counter__value-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}`;
-}
-
 class DayCounterWidget extends WidgetType {
 	constructor(
 		private readonly current: number,
@@ -686,7 +489,13 @@ const livePreviewDayCounterExtension = ViewPlugin.fromClass(
 
 export default class InteractiveDayCountersPlugin extends Plugin {
 	settings: InteractiveDayCounterSettings = DEFAULT_SETTINGS;
-	private customStyleEl: HTMLStyleElement | null = null;
+	private readonly appearanceVariables = [
+		"--interactive-day-counter-border-color",
+		"--interactive-day-counter-border-radius",
+		"--interactive-day-counter-border-width",
+		"--interactive-day-counter-background-color",
+		"--interactive-day-counter-size",
+	] as const;
 
 	override async onload(): Promise<void> {
 		await this.loadSettings();
@@ -697,7 +506,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 
 		this.addCommand({
 			id: "insert-day-counter",
-			name: "Insert counter",
+			name: "Insert token",
 			editorCallback: (editor) => {
 				editor.replaceSelection(this.makeCounterFromSelection(editor.getSelection()));
 			},
@@ -708,7 +517,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 				menu.addItem((item) => {
 					item
 						.setSection("formatting")
-						.setTitle("Insert counter")
+						.setTitle("Insert token")
 						.setIcon("calendar-range")
 						.onClick(() => {
 							editor.replaceSelection(
@@ -730,8 +539,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 	}
 
 	override onunload(): void {
-		this.customStyleEl?.remove();
-		this.customStyleEl = null;
+		this.clearAppearance();
 	}
 
 	async loadSettings(): Promise<void> {
@@ -784,15 +592,40 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 	}
 
 	private applyAppearance(): void {
-		if (!this.customStyleEl) {
-			this.customStyleEl = document.createElement("style");
-			this.customStyleEl.id = CUSTOM_STYLE_ID;
-			document.head.appendChild(this.customStyleEl);
-		}
+		const styleRoot = document.body ?? document.documentElement;
+		const backgroundColor =
+			this.settings.backgroundMode === "solid"
+				? this.settings.backgroundColor
+				: "transparent";
 
-		this.customStyleEl.textContent = `${SETTINGS_TAB_CSS}\n\n${buildCounterCss(
-			this.settings,
-		).trim()}`;
+		styleRoot.style.setProperty(
+			"--interactive-day-counter-border-color",
+			this.settings.borderColor,
+		);
+		styleRoot.style.setProperty(
+			"--interactive-day-counter-border-radius",
+			`${this.settings.borderRadius}px`,
+		);
+		styleRoot.style.setProperty(
+			"--interactive-day-counter-border-width",
+			`${this.settings.borderWidth}px`,
+		);
+		styleRoot.style.setProperty(
+			"--interactive-day-counter-background-color",
+			backgroundColor,
+		);
+		styleRoot.style.setProperty(
+			"--interactive-day-counter-size",
+			`${this.settings.counterSize}%`,
+		);
+	}
+
+	private clearAppearance(): void {
+		const styleRoot = document.body ?? document.documentElement;
+
+		for (const variableName of this.appearanceVariables) {
+			styleRoot.style.removeProperty(variableName);
+		}
 	}
 
 	async updateAppearance(
@@ -1101,10 +934,13 @@ class InteractiveDayCounterSettingTab extends PluginSettingTab {
 		const hero = containerEl.createDiv({
 			cls: "interactive-day-counter-settings__hero",
 		});
-		hero.createEl("h2", { text: "Counter" });
-		hero.createEl("p", {
-			text: "Simple counters for goals, streaks, or progress. Use the controls below to adjust the corners, border, background, and size.",
-		});
+		const heroHeading = new Setting(hero)
+			.setName("Counter")
+			.setDesc(
+				"Simple counters for goals, streaks, or progress. Use the controls below to adjust the corners, border, background, and size.",
+			)
+			.setHeading();
+		heroHeading.settingEl.addClass("interactive-day-counter-settings__hero-heading");
 
 		const preview = hero.createDiv({
 			cls: "interactive-day-counter-settings__preview",
