@@ -1,10 +1,12 @@
-# Counter
+# Interactive Counter 
+
+<img width="340" height="97" alt="image" src="https://github.com/user-attachments/assets/e83e9b85-364b-48fb-b6e0-3d697de2a92e" />
 
 Compact inline counters for Obsidian notes.
 
 `Counter` turns markdown tokens like `<day-3/10>` into interactive counters in both Live Preview and Reading View.
 
-## Features
+## Features 🫆
 
 - Inline counters rendered from `<day-current/goal>` tokens
 - Edit both the current value and goal directly from the note
