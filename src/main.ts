@@ -32,12 +32,12 @@ interface InteractiveDayCounterSettings {
 const DAY_TOKEN_REGEX = /<day-(\d+)\/(\d+)>/g;
 const DAY_TOKEN_PLAIN_REGEX = /<day-(\d+)\/(\d+)>/;
 const DEFAULT_SETTINGS: InteractiveDayCounterSettings = {
-	borderRadius: 8,
-	borderWidth: 1,
+	borderRadius: 3,
+	borderWidth: 0,
 	borderColor: "var(--background-modifier-border)",
 	backgroundMode: "solid",
-	backgroundColor: "var(--background-primary)",
-	counterSize: 100,
+	backgroundColor: "#3c3c3c",
+	counterSize: 70,
 };
 const HEX_COLOR_REGEX = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
 const BORDER_COLOR_PICKER_FALLBACK = "#cbd5e1";
@@ -506,7 +506,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 
 		this.addCommand({
 			id: "insert-day-counter",
-			name: "Insert token",
+			name: "Insert counter",
 			editorCallback: (editor) => {
 				editor.replaceSelection(this.makeCounterFromSelection(editor.getSelection()));
 			},
@@ -517,7 +517,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 				menu.addItem((item) => {
 					item
 						.setSection("formatting")
-						.setTitle("Insert token")
+						.setTitle("Insert counter")
 						.setIcon("calendar-range")
 						.onClick(() => {
 							editor.replaceSelection(

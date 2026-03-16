@@ -1,11 +1,17 @@
 body {
 	--interactive-day-counter-border-color: var(--background-modifier-border);
-	--interactive-day-counter-border-radius: 8px;
-	--interactive-day-counter-border-width: 1px;
-	--interactive-day-counter-background-color: var(--background-primary);
-	--interactive-day-counter-size: 100%;
-	--interactive-day-counter-focus-ring-color: var(--interactive-accent);
+	--interactive-day-counter-border-radius: 3px;
+	--interactive-day-counter-border-width: 0px;
+	--interactive-day-counter-background-color: #3c3c3c;
+	--interactive-day-counter-size: 70%;
+	--interactive-day-counter-focus-ring-color: color-mix(in srgb, #ffffff 22%, transparent);
 	--interactive-day-counter-shadow-color: var(--background-modifier-border-hover);
+	--interactive-day-counter-badge-width: 35px;
+	--interactive-day-counter-badge-height: 18px;
+	--interactive-day-counter-badge-ratio: 35 / 18;
+	--interactive-day-counter-text-width: 24px;
+	--interactive-day-counter-text-size: 10px;
+	--interactive-day-counter-text-height: 10px;
 }
 
 .interactive-day-counter-settings {
@@ -72,30 +78,30 @@ body {
 
 .interactive-day-counter {
 	display: inline-flex;
-	align-items: stretch;
+	align-items: center;
 	width: fit-content;
-	margin-inline: 0.4rem 0.08rem;
+	margin-inline: 0.28rem 0.06rem;
 	position: relative;
 	border-radius: var(--interactive-day-counter-border-radius);
-	color: var(--text-normal);
+	color: #f5f5f5;
 	font-size: var(--interactive-day-counter-size);
 	line-height: 1;
 	vertical-align: middle;
-	box-shadow: 0 1px 0 var(--interactive-day-counter-shadow-color);
+	box-shadow: none;
 	isolation: isolate;
 }
 
 .markdown-source-view.mod-cm6 .interactive-day-counter {
-	top: 0.04em;
+	top: 0;
 }
 
 .interactive-day-counter::after {
 	content: "";
 	position: absolute;
-	inset: 1px;
+	inset: -2px;
 	z-index: 3;
 	pointer-events: none;
-	border-radius: inherit;
+	border-radius: calc(var(--interactive-day-counter-border-radius) + 2px);
 	outline: 0 solid transparent;
 	transition: outline-color 120ms ease, outline-width 120ms ease;
 }
@@ -126,28 +132,40 @@ body {
 	grid-auto-flow: column;
 	align-items: center;
 	justify-content: center;
-	column-gap: 0.08em;
-	min-width: 4.1em;
-	padding: 0.28em 0.48em;
+	box-sizing: border-box;
+	column-gap: 0;
+	width: var(--interactive-day-counter-badge-width);
+	height: var(--interactive-day-counter-badge-height);
+	aspect-ratio: var(--interactive-day-counter-badge-ratio);
+	padding-block: calc(
+		(var(--interactive-day-counter-badge-height) - var(--interactive-day-counter-text-height)) / 2
+	);
+	padding-inline: calc(
+		(var(--interactive-day-counter-badge-width) - var(--interactive-day-counter-text-width)) / 2
+	);
 	background: var(--interactive-day-counter-background-color) !important;
 	background-color: var(--interactive-day-counter-background-color) !important;
-	color: currentColor;
+	color: #f5f5f5;
 	font-variant-numeric: tabular-nums;
 	font-feature-settings: "tnum";
-	font-size: 1em;
-	font-weight: 600;
-	line-height: 1;
+	font-size: var(--interactive-day-counter-text-size);
+	font-weight: 700;
+	line-height: var(--interactive-day-counter-text-height);
 	border: var(--interactive-day-counter-border-width) solid var(--interactive-day-counter-border-color);
 	border-radius: var(--interactive-day-counter-border-radius);
 	position: relative;
 	z-index: 1;
+	box-shadow: none;
+	overflow: hidden;
 }
 
 .interactive-day-counter__separator {
-	opacity: 0.58;
+	opacity: 0.9;
 	user-select: none;
-	min-width: 0.42em;
+	min-width: 4px;
+	height: var(--interactive-day-counter-text-height);
 	text-align: center;
+	line-height: var(--interactive-day-counter-text-height);
 }
 
 .interactive-day-counter__value {
@@ -159,7 +177,8 @@ body {
 	background: transparent !important;
 	background-color: transparent !important;
 	border: 0;
-	line-height: 1;
+	height: var(--interactive-day-counter-text-height);
+	line-height: var(--interactive-day-counter-text-height);
 	text-align: center;
 }
 
@@ -170,15 +189,16 @@ body {
 .interactive-day-counter__value-slot {
 	display: inline-flex;
 	align-items: center;
-	min-width: 1.7em;
+	min-width: 0;
 	justify-content: center;
 	background: transparent !important;
 	background-color: transparent !important;
+	height: var(--interactive-day-counter-text-height);
 }
 
 .interactive-day-counter__value-input {
-	width: 1.8em;
-	min-width: 1.8em;
+	width: auto;
+	min-width: 0;
 	border: 0;
 	border-radius: 0;
 	background: transparent !important;
@@ -188,9 +208,10 @@ body {
 	font-variant-numeric: tabular-nums;
 	font-feature-settings: "tnum";
 	font-size: 1em;
-	font-weight: 600;
+	font-weight: 700;
 	text-align: center;
-	line-height: 1;
+	height: var(--interactive-day-counter-text-height);
+	line-height: var(--interactive-day-counter-text-height);
 	appearance: textfield;
 	-webkit-appearance: textfield;
 	-moz-appearance: textfield;
