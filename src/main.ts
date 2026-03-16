@@ -935,7 +935,7 @@ class InteractiveDayCounterSettingTab extends PluginSettingTab {
 			cls: "interactive-day-counter-settings__hero",
 		});
 		const heroHeading = new Setting(hero)
-			.setName("Counter")
+			.setName("Overview")
 			.setDesc(
 				"Simple counters for goals, streaks, or progress. Use the controls below to adjust the corners, border, background, and size.",
 			)
