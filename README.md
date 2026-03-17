@@ -30,7 +30,7 @@ It will render as an interactive counter.
 
 ## Commands
 
-- `Insert counter`
+- `Insert`
 
 If text like `3/10` is selected, the command converts it into `<day-3/10>`.
 

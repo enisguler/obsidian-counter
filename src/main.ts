@@ -506,7 +506,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 
 		this.addCommand({
 			id: "insert-day-counter",
-			name: "Insert counter",
+			name: "Insert",
 			editorCallback: (editor) => {
 				editor.replaceSelection(this.makeCounterFromSelection(editor.getSelection()));
 			},
@@ -517,7 +517,7 @@ export default class InteractiveDayCountersPlugin extends Plugin {
 				menu.addItem((item) => {
 					item
 						.setSection("formatting")
-						.setTitle("Insert counter")
+						.setTitle("Insert")
 						.setIcon("calendar-range")
 						.onClick(() => {
 							editor.replaceSelection(
